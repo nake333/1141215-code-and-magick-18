@@ -34,7 +34,6 @@ var getMaxElement = function (arr) {
 
 var randomBlueSaturation = function () {
   var blueSaturation = Math.round(Math.random() * 100);
- 
   return 'hsl(240, ' + blueSaturation + '%, 50%)';
 };
 
@@ -53,7 +52,6 @@ window.renderStatistics = function (ctx, names, times) {
   }
 
   var maxTime = getMaxElement(times);
- 
   for (var i = 0; i < names.length; i++) {
     ctx.fillStyle = '#000';
     ctx.fillText(names[i], CLOUD_X + BAR_GAP + (BAR_GAP + BAR_WIDTH) * i, PLAYER_NAMES_Y);
