@@ -40,7 +40,7 @@ var renderWinnersText = function (ctx) {
   ctx.fillText('Список результатов:', RECTANGLE_X + FONT_GAP, RECTANGLE_Y + FONT_GAP * 2);
 };
 
-var randomNumber = function () { 
+var randomNumber = function () {
   return Math.round(Math.random() * 100);
 };
 
