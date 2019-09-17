@@ -32,7 +32,7 @@ var getMaxElement = function (arr) {
   return 'Массив ' + arr + 'пустой!';
 };
 
-var renderWinnersText = function(ctx) {
+var renderWinnersText = function (ctx) {
   ctx.fillStyle = '#000';
   ctx.font = '16px PT Mono';
   ctx.textBaseline = 'hanging';
@@ -40,7 +40,7 @@ var renderWinnersText = function(ctx) {
   ctx.fillText('Список результатов:', RECTANGLE_X + FONT_GAP, RECTANGLE_Y + FONT_GAP * 2);
 };
 
-var randomNumber = function () {  
+var randomNumber = function () { 
   return Math.round(Math.random() * 100);
 };
 
