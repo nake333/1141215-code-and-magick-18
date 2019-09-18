@@ -12,8 +12,6 @@ var BAR_HEIGHT = 150;
 var PLAYER_NAMES_Y = 255;
 
 
-
-
 var renderRectangle = function (ctx, x, y, width, height, color) {
   ctx.fillStyle = color;
   ctx.fillRect(x, y, width, height);
