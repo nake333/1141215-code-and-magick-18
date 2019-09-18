@@ -12,9 +12,11 @@ var BAR_HEIGHT = 150;
 var PLAYER_NAMES_Y = 255;
 
 
-var renderRectangle = function (ctx, x, y, color) {
+
+
+var renderRectangle = function (ctx, x, y, width, height, color) {
   ctx.fillStyle = color;
-  ctx.fillRect(x, y, RECTANGLE_WIDTH, RECTANGLE_HEIGHT);
+  ctx.fillRect(x, y, width, height);
 
 };
 
@@ -32,12 +34,15 @@ var getMaxElement = function (arr) {
   return 'Массив ' + arr + 'пустой!';
 };
 
-var renderWinnersText = function (ctx) {
+var renderRectangleTitle = function (ctx) {
   ctx.fillStyle = '#000';
-  ctx.font = '16px PT Mono';
-  ctx.textBaseline = 'hanging';
   ctx.fillText('Ура вы победили!', RECTANGLE_X + FONT_GAP, RECTANGLE_Y + FONT_GAP);
   ctx.fillText('Список результатов:', RECTANGLE_X + FONT_GAP, RECTANGLE_Y + FONT_GAP * 2);
+};
+
+var renderWinnersText = function (ctx, text, x, y) {
+  ctx.fillStyle = '#000';
+  ctx.fillText(text, x, y);
 };
 
 var randomNumber = function () {
@@ -45,9 +50,11 @@ var randomNumber = function () {
 };
 
 window.renderStatistics = function (ctx, names, times) {
-  renderRectangle(ctx, RECTANGLE_X + GAP, RECTANGLE_Y + GAP, 'rgba(0, 0, 0, 0.7)');
-  renderRectangle(ctx, RECTANGLE_X, RECTANGLE_Y, '#fff');
-  renderWinnersText(ctx);
+  renderRectangle(ctx, RECTANGLE_X + GAP, RECTANGLE_Y + GAP, RECTANGLE_WIDTH, RECTANGLE_HEIGHT, 'rgba(0, 0, 0, 0.7)');
+  renderRectangle(ctx, RECTANGLE_X, RECTANGLE_Y, RECTANGLE_WIDTH, RECTANGLE_HEIGHT, '#fff');
+  ctx.font = '16px PT Mono';
+  ctx.textBaseline = 'hanging';
+  renderRectangleTitle(ctx);
 
   for (var j = 0; j < times.length; j++) {
     times[j] = Math.round(times[j]);
@@ -55,10 +62,12 @@ window.renderStatistics = function (ctx, names, times) {
 
   var maxTime = getMaxElement(times);
   for (var i = 0; i < names.length; i++) {
-    ctx.fillStyle = '#000';
-    ctx.fillText(names[i], RECTANGLE_X + BAR_GAP + (BAR_GAP + BAR_WIDTH) * i, PLAYER_NAMES_Y);
-    ctx.fillText(times[i], RECTANGLE_X + BAR_GAP + (BAR_GAP + BAR_WIDTH) * i, BAR_GAP * 2 - GAP * 0.5 - FONT_GAP + (BAR_HEIGHT - (BAR_HEIGHT * times[i]) / maxTime));
-    ctx.fillStyle = names[i] === 'Вы' ? 'rgba(255, 0, 0, 1)' : 'hsl(240, ' + randomNumber() + '%, 50%)';
-    ctx.fillRect(RECTANGLE_X + BAR_GAP + (BAR_GAP + BAR_WIDTH) * i, BAR_GAP * 2 - GAP * 0.5 + (BAR_HEIGHT - (BAR_HEIGHT * times[i]) / maxTime), BAR_WIDTH, (BAR_HEIGHT * times[i]) / maxTime);
+    var winnerX = RECTANGLE_X + BAR_GAP + (BAR_GAP + BAR_WIDTH) * i;
+    var winnerY = BAR_GAP * 2 - GAP * 0.5 + (BAR_HEIGHT - (BAR_HEIGHT * times[i]) / maxTime);
+    var randomBlue = names[i] === 'Вы' ? 'rgba(255, 0, 0, 1)' : 'hsl(240, ' + randomNumber() + '%, 50%)';
+
+    renderWinnersText(ctx, names[i], winnerX, PLAYER_NAMES_Y);
+    renderWinnersText(ctx, times[i], winnerX, winnerY - FONT_GAP);
+    renderRectangle(ctx, winnerX, winnerY, BAR_WIDTH, (BAR_HEIGHT * times[i]) / maxTime, randomBlue);
   }
 };
