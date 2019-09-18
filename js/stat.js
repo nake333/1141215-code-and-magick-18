@@ -32,19 +32,15 @@ var getMaxElement = function (arr) {
   return 'Массив ' + arr + 'пустой!';
 };
 
-var renderRectangleTitle = function (ctx) {
-  ctx.fillStyle = '#000';
-  ctx.fillText('Ура вы победили!', RECTANGLE_X + FONT_GAP, RECTANGLE_Y + FONT_GAP);
-  ctx.fillText('Список результатов:', RECTANGLE_X + FONT_GAP, RECTANGLE_Y + FONT_GAP * 2);
-};
-
-var renderWinnersText = function (ctx, text, x, y) {
-  ctx.fillStyle = '#000';
+var renderText = function (ctx, text, x, y, color) {
+  ctx.fillStyle = color;
   ctx.fillText(text, x, y);
 };
 
-var randomNumber = function () {
-  return Math.round(Math.random() * 100);
+var randomNumber = function (min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor((Math.random() * (max - min + 1)) + min);
 };
 
 window.renderStatistics = function (ctx, names, times) {
@@ -52,7 +48,8 @@ window.renderStatistics = function (ctx, names, times) {
   renderRectangle(ctx, RECTANGLE_X, RECTANGLE_Y, RECTANGLE_WIDTH, RECTANGLE_HEIGHT, '#fff');
   ctx.font = '16px PT Mono';
   ctx.textBaseline = 'hanging';
-  renderRectangleTitle(ctx);
+  renderText(ctx, 'Ура вы победили!', RECTANGLE_X + FONT_GAP, RECTANGLE_Y + FONT_GAP, '#000');
+  renderText(ctx, 'Список результатов:', RECTANGLE_X + FONT_GAP, RECTANGLE_Y + FONT_GAP * 2, '#000');
 
   for (var j = 0; j < times.length; j++) {
     times[j] = Math.round(times[j]);
@@ -62,10 +59,10 @@ window.renderStatistics = function (ctx, names, times) {
   for (var i = 0; i < names.length; i++) {
     var winnerX = RECTANGLE_X + BAR_GAP + (BAR_GAP + BAR_WIDTH) * i;
     var winnerY = BAR_GAP * 2 - GAP * 0.5 + (BAR_HEIGHT - (BAR_HEIGHT * times[i]) / maxTime);
-    var randomBlue = names[i] === 'Вы' ? 'rgba(255, 0, 0, 1)' : 'hsl(240, ' + randomNumber() + '%, 50%)';
+    var randomBlue = names[i] === 'Вы' ? 'rgba(255, 0, 0, 1)' : 'hsl(240, ' + randomNumber(0, 100) + '%, 50%)';
 
-    renderWinnersText(ctx, names[i], winnerX, PLAYER_NAMES_Y);
-    renderWinnersText(ctx, times[i], winnerX, winnerY - FONT_GAP);
+    renderText(ctx, names[i], winnerX, PLAYER_NAMES_Y, '#000');
+    renderText(ctx, times[i], winnerX, winnerY - FONT_GAP, '#000');
     renderRectangle(ctx, winnerX, winnerY, BAR_WIDTH, (BAR_HEIGHT * times[i]) / maxTime, randomBlue);
   }
 };
