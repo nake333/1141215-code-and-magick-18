@@ -16,8 +16,7 @@ var getRandomArrayElement = function (arr) {
 
 var generateRandomWizard = function () {
   var wizard = {
-    name: getRandomArrayElement(WIZARD_NAMES),
-    surname: getRandomArrayElement(WIZARD_SURNAMES),
+    name: getRandomArrayElement(WIZARD_NAMES) + ' ' + getRandomArrayElement(WIZARD_SURNAMES),
     coatColor: getRandomArrayElement(WIZARD_COAT_COLORS),
     eyesColor: getRandomArrayElement(WIZARD_EYES_COLORS)
   };
@@ -37,7 +36,7 @@ var similarWizardTemplate = document.querySelector('#similar-wizard-template').c
 var renderWizard = function (wizard) {
   var wizardElement = similarWizardTemplate.cloneNode(true);
 
-  wizardElement.querySelector('.setup-similar-label').textContent = wizard.name.length > wizard.surname.length ? wizard.name + ' ' + wizard.surname : wizard.surname + ' ' + wizard.name;
+  wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
   wizardElement.querySelector('.wizard-coat').style.fill = wizard.coatColor;
   wizardElement.querySelector('.wizard-eyes').style.fill = wizard.eyesColor;
 
