@@ -94,7 +94,7 @@ setupClose.addEventListener('keydown', function (evt) {
 var setupNameInput = setup.querySelector('.setup-user-name');
 setupNameInput.addEventListener('keydown', function (evt) {
   evt.stopPropagation();
-  if (eventt.keyCOde === ENTER_KEYCODE) {
+  if (event.keyCode === ENTER_KEYCODE) {
     event.preventDefault();
   }
 });
@@ -106,7 +106,7 @@ var coatColorInput = setup.querySelector('[name="coat-color"]');
 var eyesColorInput = setup.querySelector('[name="eyes-color"]');
 var fireballColorInput = document.querySelector('[name="fireball-color"]');
 
-coatColor.addEventListener('click', function() {
+coatColor.addEventListener('click', function () {
   var newCoatColor = WIZARD_COAT_COLORS[WIZARD_COAT_COLORS.indexOf(coatColorInput.value) + 1];
   if (newCoatColor === undefined) {
     newCoatColor = WIZARD_COAT_COLORS[0];
@@ -115,7 +115,7 @@ coatColor.addEventListener('click', function() {
   coatColorInput.value = newCoatColor;
 });
 
-eyesColor.addEventListener('click', function() {
+eyesColor.addEventListener('click', function () {
   var newEyesColor = WIZARD_EYES_COLORS[WIZARD_EYES_COLORS.indexOf(eyesColorInput.value) + 1];
   if (newEyesColor === undefined) {
     newEyesColor = WIZARD_EYES_COLORS[0];
@@ -124,7 +124,7 @@ eyesColor.addEventListener('click', function() {
   eyesColorInput.value = newEyesColor;
 });
 
-fireballColor.addEventListener('click', function() {
+fireballColor.addEventListener('click', function () {
   var newFireballColor = WIZARD_FIREBALL_COLORS[WIZARD_FIREBALL_COLORS.indexOf(fireballColorInput.value) + 1];
   if (newFireballColor === undefined) {
     newFireballColor = WIZARD_FIREBALL_COLORS[0];
