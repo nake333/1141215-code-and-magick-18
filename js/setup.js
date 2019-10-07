@@ -139,7 +139,7 @@
       newFireballColor = WIZARD_FIREBALL_COLORS[0];
     }
     fireballColor.setAttribute('style', 'background-color: ' + newFireballColor);
-    fireballColorInput.value = newFireballColor;    
+    fireballColorInput.value = newFireballColor;
   });
 
   window.setup = {
